@@ -1,0 +1,29 @@
+diff -ruN a/lib60870-C/make/target_system.mk b/lib60870-C/make/target_system.mk
+--- a/lib60870-C/make/target_system.mk	2020-10-16 17:54:26.000000000 +0200
++++ b/lib60870-C/make/target_system.mk	2021-11-13 18:25:59.222708837 +0100
+@@ -146,8 +146,8 @@
+ endif
+ 
+ ifneq ($(TARGET), CLANG-CHECK)
+-CC=$(TOOLCHAIN_PREFIX)gcc
+-CPP=$(TOOLCHAIN_PREFIX)g++
++#CC=$(TOOLCHAIN_PREFIX)gcc
++#CPP=$(TOOLCHAIN_PREFIX)g++
+ endif
+ 
+ ifeq ($(TARGET), BSD)
+diff -ruN a/lib60870-C/Makefile b/lib60870-C/Makefile
+--- a/lib60870-C/Makefile	2020-10-16 17:54:26.000000000 +0200
++++ b/lib60870-C/Makefile	2021-11-16 09:17:11.809631942 +0100
+@@ -141,9 +141,9 @@
+ 	$(CC) $(CFLAGS) -c $(LIB_INCLUDES) $(TEST_INCLUDES) $(OUTPUT_OPTION) $<
+ 	
+ install:	$(LIB_NAME)
+-	mkdir -p $(INSTALL_PREFIX)/include
++	mkdir -p $(INSTALL_PREFIX)/include/60870
+ 	mkdir -p $(INSTALL_PREFIX)/lib
+-	cp $(LIB_API_HEADER_FILES) $(INSTALL_PREFIX)/include
++	cp $(LIB_API_HEADER_FILES) $(INSTALL_PREFIX)/include/60870
+ 	cp $(LIB_NAME) $(INSTALL_PREFIX)/lib
+ 
+ clean:
