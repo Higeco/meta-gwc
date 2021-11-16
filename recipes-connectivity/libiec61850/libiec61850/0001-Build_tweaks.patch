@@ -1,0 +1,38 @@
+diff -ruN a/make/target_system.mk b/make/target_system.mk
+--- a/make/target_system.mk	2021-11-13 14:30:55.769396589 +0100
++++ b/make/target_system.mk	2021-11-13 14:27:26.857317036 +0100
+@@ -147,8 +147,8 @@
+ endif
+ 
+ ifneq ($(TARGET), CLANG-CHECK)
+-CC=$(TOOLCHAIN_PREFIX)gcc
+-CPP=$(TOOLCHAIN_PREFIX)g++
++#CC=$(TOOLCHAIN_PREFIX)gcc
++#CPP=$(TOOLCHAIN_PREFIX)g++
+ endif
+ 
+ ifeq ($(TARGET), BSD)
+diff -ruN a/Makefile b/Makefile
+--- a/Makefile	2021-04-12 17:28:24.000000000 +0200
++++ b/Makefile	2021-11-16 09:16:42.841556261 +0100
+@@ -144,7 +144,7 @@
+ CFLAGS += -Wshadow
+ CFLAGS += -Wall
+ CFLAGS += -Wextra
+-CFLAGS += -Wno-format
++#CFLAGS += -Wno-format
+ #CFLAGS += -Wconditional-uninitialized
+ #CFLAGS += -Werror  
+ 
+@@ -180,9 +180,9 @@
+ 	$(CC) $(CFLAGS) -c $(LIB_INCLUDES) $(OUTPUT_OPTION) $<
+ 	
+ install:	$(LIB_NAME)
+-	mkdir -p $(INSTALL_PREFIX)/include
++	mkdir -p $(INSTALL_PREFIX)/include/iec61850
+ 	mkdir -p $(INSTALL_PREFIX)/lib
+-	cp $(LIB_API_HEADER_FILES) $(INSTALL_PREFIX)/include
++	cp $(LIB_API_HEADER_FILES) $(INSTALL_PREFIX)/include/iec61850
+ 	cp $(LIB_NAME) $(INSTALL_PREFIX)/lib
+ 
+ clean:
