@@ -1,3 +1,18 @@
+diff -ruN a/hal/tls/mbedtls/mbedtls_config.h b/hal/tls/mbedtls/mbedtls_config.h
+--- a/hal/tls/mbedtls/mbedtls_config.h	2021-04-12 17:28:24.000000000 +0200
++++ b/hal/tls/mbedtls/mbedtls_config.h	2022-02-10 08:54:42.994945755 +0100
+@@ -54,6 +54,11 @@
+ /* For testing with compat.sh */
+ #define MBEDTLS_FS_IO
+ 
++
++#define MBEDTLS_CMAC_C
++#define MBEDTLS_X509_CRL_PARSE_C
++#define MBEDTLS_SSL_SESSION_TICKETS
++
+ #include "mbedtls/check_config.h"
+ 
+ #endif /* MBEDTLS_CONFIG_H */
 diff -ruN a/make/target_system.mk b/make/target_system.mk
 --- a/make/target_system.mk	2021-11-13 14:30:55.769396589 +0100
 +++ b/make/target_system.mk	2021-11-13 14:27:26.857317036 +0100
