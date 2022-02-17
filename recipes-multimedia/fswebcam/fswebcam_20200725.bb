@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/fsphil/fswebcam"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=393a5ca445f6965873eca0259a17f833"
 
 DEPENDS += "gd"
-RDEPENDS_${PN} += "gd"
+RDEPENDS:${PN} += "gd"
 
 SRC_URI = "git://github.com/fsphil/fswebcam.git;branch=master"
 

@@ -33,4 +33,4 @@ do_install() {
 }
 
 # Being a static library the main package will be empty
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
