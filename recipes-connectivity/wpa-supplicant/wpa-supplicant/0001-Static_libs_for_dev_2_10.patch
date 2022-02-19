@@ -1,0 +1,31 @@
+diff -ruN a/src/common/Makefile b/src/common/Makefile
+--- a/src/common/Makefile	2022-02-17 06:26:28.005621605 +0100
++++ b/src/common/Makefile	2022-02-19 09:10:24.984985749 +0100
+@@ -4,6 +4,7 @@
+ CFLAGS += -DCONFIG_SUITE
+ CFLAGS += -DCONFIG_SUITEB
+ CFLAGS += -DCONFIG_PTKSA_CACHE
++CFLAGS += -DCONFIG_CTRL_IFACE -DCONFIG_CTRL_IFACE_UNIX
+ 
+ LIB_OBJS= \
+ 	gas.o \
+@@ -11,6 +12,6 @@
+ 	ieee802_11_common.o \
+ 	sae.o \
+ 	ptksa_cache.o \
+-	wpa_common.o
++	wpa_common.o wpa_ctrl.o
+ 
+ include ../lib.rules
+diff -ruN a/src/lib.rules b/src/lib.rules
+--- a/src/lib.rules	2022-01-16 21:51:29.000000000 +0100
++++ b/src/lib.rules	2022-02-19 05:56:07.452399986 +0100
+@@ -17,7 +17,7 @@
+ 
+ $(ALL): $(LIB_OBJS)
+ 	@$(E) "  AR  $(notdir $@)"
+-	$(Q)$(AR) crT $@ $?
++	$(Q)$(AR) cr $@ $?
+ 
+ install-default:
+ 	@echo Nothing to be made.
