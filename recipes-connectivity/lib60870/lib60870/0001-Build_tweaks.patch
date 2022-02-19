@@ -13,9 +13,17 @@ diff -ruN a/lib60870-C/make/target_system.mk b/lib60870-C/make/target_system.mk
  
  ifeq ($(TARGET), BSD)
 diff -ruN a/lib60870-C/Makefile b/lib60870-C/Makefile
---- a/lib60870-C/Makefile	2020-10-16 17:54:26.000000000 +0200
-+++ b/lib60870-C/Makefile	2021-11-16 09:17:11.809631942 +0100
-@@ -141,9 +141,9 @@
+--- a/lib60870-C/Makefile	2022-02-17 12:30:20.315682283 +0100
++++ b/lib60870-C/Makefile	2022-02-17 12:31:07.620782837 +0100
+@@ -62,6 +62,7 @@
+ LIB_API_HEADER_FILES += src/hal/inc/hal_thread.h
+ LIB_API_HEADER_FILES += src/hal/inc/hal_socket.h
+ LIB_API_HEADER_FILES += src/hal/inc/hal_serial.h
++LIB_API_HEADER_FILES += src/hal/inc/hal_base.h
+ LIB_API_HEADER_FILES += src/inc/api/cs101_information_objects.h
+ LIB_API_HEADER_FILES += src/inc/api/cs101_master.h
+ LIB_API_HEADER_FILES += src/inc/api/cs101_slave.h
+@@ -141,9 +142,9 @@
  	$(CC) $(CFLAGS) -c $(LIB_INCLUDES) $(TEST_INCLUDES) $(OUTPUT_OPTION) $<
  	
  install:	$(LIB_NAME)
