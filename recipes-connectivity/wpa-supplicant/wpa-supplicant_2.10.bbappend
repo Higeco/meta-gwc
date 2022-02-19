@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
 # We need some libraries from wpa_supplicant for GWC eos, so
 # we build them as static libraries and then deliver them (and the headers)
@@ -6,15 +6,15 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
 # The package makefile will create tiny libraries (which need also the .o
 # being also there), patch it to have a normal .a delivery
-SRC_URI+= " file://0001-Generate_normal_static_libs.patch file://0002-Add_wpa_ctrl_to_static.patch"
+SRC_URI+= " file://0001-Static_libs_for_dev_2_10.patch"
 
 # Additional libraries build
-do_compile_append () {
+do_compile:append () {
 	oe_runmake -C src
 }
 
 # Additional libraries/headers install
-do_install_append () {
+do_install:append () {
 	install -d ${D}/usr/lib/wpa_supplicant
 	install -d ${D}/usr/include/wpa_supplicant
 	install -m 0644 ${S}/src/utils/libutils.a ${D}/usr/lib/wpa_supplicant
@@ -24,4 +24,4 @@ do_install_append () {
 
 }
 
-FILES_${PN}-staticdev += "/usr/lib/wpa_supplicant/libutils.a /usr/lib/wpa_supplicant/libcommon.a"
+FILES:${PN}-staticdev += "/usr/lib/wpa_supplicant/libutils.a /usr/lib/wpa_supplicant/libcommon.a"
