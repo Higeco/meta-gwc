@@ -1,0 +1,34 @@
+diff -ruN a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2022-02-20 07:06:37.885018405 +0100
++++ b/CMakeLists.txt	2022-02-20 07:07:29.733174136 +0100
+@@ -82,9 +82,10 @@
+ endif()
+ 
+ # External dependencies
+-include(./deps/asio.cmake)
+-include(./deps/exe4cpp.cmake)
+-include(./deps/ser4cpp.cmake)
++# ASIO comes from Yocto, exe4cpp/ser4cpp are header only and will be added manually
++#include(./deps/asio.cmake)
++#include(./deps/exe4cpp.cmake)
++#include(./deps/ser4cpp.cmake)
+ 
+ if(DNP3_TLS)
+     find_package(OpenSSL 1.1.1 REQUIRED)
+diff -ruN a/cpp/lib/CMakeLists.txt b/cpp/lib/CMakeLists.txt
+--- a/cpp/lib/CMakeLists.txt	2022-02-20 07:06:53.261064591 +0100
++++ b/cpp/lib/CMakeLists.txt	2022-02-20 07:07:45.205220607 +0100
+@@ -669,9 +669,10 @@
+ add_library(opendnp3 ${all_sources})
+ target_compile_features(opendnp3 PUBLIC cxx_std_14)
+ target_link_libraries(opendnp3 PRIVATE
+-    $<BUILD_INTERFACE:ser4cpp>
+-    $<BUILD_INTERFACE:exe4cpp>
+-    $<BUILD_INTERFACE:asio>
++# ASIO comes from Yocto, exe4cpp/ser4cpp are header only and will be added manually
++#    $<BUILD_INTERFACE:ser4cpp>
++#    $<BUILD_INTERFACE:exe4cpp>
++#    $<BUILD_INTERFACE:asio>
+     $<$<BOOL:${DNP3_TLS}>:OpenSSL::SSL>
+ )
+ target_include_directories(opendnp3
