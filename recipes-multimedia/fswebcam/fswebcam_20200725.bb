@@ -1,5 +1,5 @@
 DESCRIPTION = "fswebcam - Small and simple webcam software for *nix"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-or-later"
 HOMEPAGE = "https://github.com/fsphil/fswebcam"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=393a5ca445f6965873eca0259a17f833"
 

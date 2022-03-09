@@ -1,5 +1,5 @@
 DESCRIPTION = "LIBNODAVE -- Exchange data with Siemens PLCs"
-LICENSE = "GPLv2"
+LICENSE = "LGPL-2.0-or-later"
 HOMEPAGE = "http://libnodave.sourceforge.net/"
 LIC_FILES_CHKSUM = "file://doc/index.html;md5=f83c2c7b30f118247e40f5e73a56ee1a"
 PR = "r1"
