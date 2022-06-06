@@ -1,5 +1,5 @@
 DESCRIPTION = "libIEC61850, the open-source library for the IEC 61850 protocols"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-or-later"
 HOMEPAGE = "https://libiec61850.com/"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 

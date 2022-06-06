@@ -1,5 +1,5 @@
 DESCRIPTION = "lib60870 an implementation of the IEC 60870-5-101/104 protocol "
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-or-later"
 HOMEPAGE = "https://www.mz-automation.de/communication-protocols/iec-60870-5-101-104-c-source-code-library/"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
