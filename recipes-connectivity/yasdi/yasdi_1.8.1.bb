@@ -6,7 +6,7 @@ PR = "r0"
 
 SRC_URI = "gitsm://github.com/fedepell/libyasdi.git;branch=gwcV4;protocol=https"
 
-SRCREV = "33c49b092f0da597bb42057f98f9c3a27526679f"
+SRCREV = "b932214d82bcf25e48fc7f4cfdb0bccfda25259c"
 
 inherit pkgconfig cmake
 
