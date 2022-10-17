@@ -59,6 +59,8 @@ EXTRA_OECONF = " \
     --with-persistent-directory=${localstatedir}/lib/net-snmp \
     --with-endianness=${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
     --with-mib-modules='${MIB_MODULES}' \
+    --with-security-modules=tsm \
+    --with-transports='DTLSUDP TLSTCP' \
 "
 
 MIB_MODULES = ""
