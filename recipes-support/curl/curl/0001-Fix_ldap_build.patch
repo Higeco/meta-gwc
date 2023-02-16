@@ -1,0 +1,70 @@
+commit 6f15a10d345bf2efdbca41e07e2e90b2f6814399
+Author: Federico Pellegrin <fede@evolware.org>
+Date:   Wed Feb 8 19:44:58 2023 +0100
+
+    openldap: fix missing sasl symbols at build in specific configs
+    
+    If curl is built with openldap support (USE_OPENLDAP=1) but does not
+    have also some other protocol (IMAP/SMTP/POP3) enabled that brings
+    in Curl_sasl_* functions, then the build will fail with undefined
+    references to various symbols:
+    
+    ld: ../lib/.libs/libcurl.so: undefined reference to `Curl_sasl_decode_mech'
+    ld: ../lib/.libs/libcurl.so: undefined reference to `Curl_sasl_parse_url_auth_option'
+    ld: ../lib/.libs/libcurl.so: undefined reference to `Curl_sasl_cleanup'
+    ld: ../lib/.libs/libcurl.so: undefined reference to `Curl_sasl_can_authenticate'
+    ld: ../lib/.libs/libcurl.so: undefined reference to `Curl_sasl_continue'
+    ld: ../lib/.libs/libcurl.so: undefined reference to `Curl_sasl_start'
+    ld: ../lib/.libs/libcurl.so: undefined reference to `Curl_sasl_init'
+    
+    This was tracked down to these functions bein used in openldap.c but
+    defined in curl_sasl.c and then forward in two vauth/ files to have
+    a guard against a set of #define configurations that was now extended
+    to cover also this case.
+    
+    Example configuration targeted that could reproduce the problem:
+    
+    curl 7.87.1-DEV () libcurl/7.87.1-DEV .... OpenLDAP/2.6.3
+    Protocols: file ftp ftps http https ldap ldaps
+
+Upstream: https://github.com/curl/curl/pull/10445
+
+diff -ruN a/lib/curl_sasl.c b/lib/curl_sasl.c
+--- a/lib/curl_sasl.c	2022-03-01 18:06:54.000000000 +0100
++++ b/lib/curl_sasl.c	2023-02-16 06:32:18.001277507 +0100
+@@ -34,7 +34,8 @@
+ #include "curl_setup.h"
+ 
+ #if !defined(CURL_DISABLE_IMAP) || !defined(CURL_DISABLE_SMTP) || \
+-  !defined(CURL_DISABLE_POP3)
++  !defined(CURL_DISABLE_POP3) || \
++  (!defined(CURL_DISABLE_LDAP) && defined(USE_OPENLDAP))
+ 
+ #include <curl/curl.h>
+ #include "urldata.h"
+diff -ruN a/lib/vauth/cleartext.c b/lib/vauth/cleartext.c
+--- a/lib/vauth/cleartext.c	2022-01-26 10:09:39.000000000 +0100
++++ b/lib/vauth/cleartext.c	2023-02-16 06:32:19.714282359 +0100
+@@ -26,7 +26,8 @@
+ #include "curl_setup.h"
+ 
+ #if !defined(CURL_DISABLE_IMAP) || !defined(CURL_DISABLE_SMTP) ||       \
+-  !defined(CURL_DISABLE_POP3)
++  !defined(CURL_DISABLE_POP3) || \
++  (!defined(CURL_DISABLE_LDAP) && defined(USE_OPENLDAP))
+ 
+ #include <curl/curl.h>
+ #include "urldata.h"
+diff -ruN a/lib/vauth/oauth2.c b/lib/vauth/oauth2.c
+--- a/lib/vauth/oauth2.c	2022-01-26 10:09:39.000000000 +0100
++++ b/lib/vauth/oauth2.c	2023-02-16 06:32:21.137286388 +0100
+@@ -25,7 +25,8 @@
+ #include "curl_setup.h"
+ 
+ #if !defined(CURL_DISABLE_IMAP) || !defined(CURL_DISABLE_SMTP) || \
+-  !defined(CURL_DISABLE_POP3)
++  !defined(CURL_DISABLE_POP3) || \
++  (!defined(CURL_DISABLE_LDAP) && defined(USE_OPENLDAP))
+ 
+ #include <curl/curl.h>
+ #include "urldata.h"
