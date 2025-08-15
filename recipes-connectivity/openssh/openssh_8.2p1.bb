@@ -93,7 +93,10 @@ INITSCRIPT_NAME_${PN}-sshd = "sshd"
 INITSCRIPT_PARAMS_${PN}-sshd = "defaults 9"
 
 SYSTEMD_PACKAGES = "${PN}-sshd"
-SYSTEMD_SERVICE_${PN}-sshd = "sshd.socket"
+# Disable the sshd.socket to avoid install conflict
+# due to the socket being masked by the GWC
+# SYSTEMD_SERVICE_${PN}-sshd = "sshd.socket"
+SYSTEMD_SERVICE_${PN}-sshd = ""
 
 inherit autotools-brokensep ptest
 
