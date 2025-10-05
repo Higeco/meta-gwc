@@ -1,0 +1,16 @@
+GNUTLS_NO_END_OF_EARLY_DATA is not available in gnutls from Dunfell,
+so we remove this flag. It is an optimization, should not be a big deal.
+Alternative would be to remove GNUTLS_EARLY_DATA all together
+
+diff -ruN curl-8.16.0/lib/vtls/gtls.c curl-8.16.0-b/lib/vtls/gtls.c
+--- curl-8.16.0/lib/vtls/gtls.c	2025-09-10 07:43:43.000000000 +0200
++++ curl-8.16.0-b/lib/vtls/gtls.c	2025-10-05 05:29:22.224000000 +0200
+@@ -896,7 +896,7 @@
+   init_flags = GNUTLS_CLIENT;
+ #ifdef CURL_GNUTLS_EARLY_DATA
+   if(peer->transport == TRNSPRT_QUIC && earlydata_max > 0)
+-    init_flags |= GNUTLS_ENABLE_EARLY_DATA | GNUTLS_NO_END_OF_EARLY_DATA;
++    init_flags |= GNUTLS_ENABLE_EARLY_DATA; // | GNUTLS_NO_END_OF_EARLY_DATA;
+   else if(earlydata_max > 0 && earlydata_max != 0xFFFFFFFFUL)
+     /* See https://gitlab.com/gnutls/gnutls/-/issues/1619
+      * We cannot differentiate between a session announcing no earldata
