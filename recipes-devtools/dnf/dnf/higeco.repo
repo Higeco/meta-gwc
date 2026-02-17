@@ -1,0 +1,15 @@
+# ==================================
+# PRODUCTION REPOSITORY
+# ==================================
+[higeco]
+name=higeco
+baseurl=https://rpm.higeco.com/hsc
+enabled=0
+
+# ==================================
+# BETA REPOSITORY! NOT TO BE USED!
+# ==================================
+# [higeco-beta]
+# name=higeco-beta
+# baseurl=https://rpm.higeco.com/hsc-beta
+
