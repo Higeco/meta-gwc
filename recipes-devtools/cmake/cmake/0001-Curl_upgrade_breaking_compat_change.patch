@@ -1,0 +1,28 @@
+See:
+https://gitlab.kitware.com/cmake/cmake/-/merge_requests/10449
+https://gitlab.kitware.com/cmake/cmake/-/merge_requests/11134
+
+diff -ruN cmake-3.16.5/Source/cmCurl.cxx cmake-3.16.5-b/Source/cmCurl.cxx
+--- cmake-3.16.5/Source/cmCurl.cxx	2020-03-04 14:50:44.000000000 +0100
++++ cmake-3.16.5-b/Source/cmCurl.cxx	2025-10-05 05:37:35.284000000 +0200
+@@ -62,7 +62,7 @@
+                                  const std::string& netrc_file)
+ {
+   std::string e;
+-  CURL_NETRC_OPTION curl_netrc_level = CURL_NETRC_LAST;
++  long curl_netrc_level = CURL_NETRC_LAST;
+   ::CURLcode res;
+ 
+   if (!netrc_level.empty()) {
+diff -ruN cmake-3.16.5/Source/CTest/cmCTestCurl.h cmake-3.16.5-b/Source/CTest/cmCTestCurl.h
+--- cmake-3.16.5/Source/CTest/cmCTestCurl.h	2020-03-04 14:50:44.000000000 +0100
++++ cmake-3.16.5-b/Source/CTest/cmCTestCurl.h	2025-10-05 05:50:50.828000000 +0200
+@@ -45,7 +45,7 @@
+   std::vector<std::string> HttpHeaders;
+   std::string HTTPProxyAuth;
+   std::string HTTPProxy;
+-  curl_proxytype HTTPProxyType;
++  long HTTPProxyType;
+   bool VerifyHostOff;
+   bool VerifyPeerOff;
+   bool UseHttp10;
