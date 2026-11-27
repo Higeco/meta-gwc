@@ -19,6 +19,8 @@ SRC_URI = "https://github.com/openssl/openssl/releases/download/openssl-${PV}/op
            file://CVE-2023-50781-4.patch \
            file://CVE-2023-50781-5.patch \
            file://CVE-2023-50781-6.patch \
+           file://CVE-2026-75806.patch \
+           file://CVE-2026-84782.patch \
           "
 
 SRC_URI:append:class-nativesdk = " \
